@@ -1,0 +1,134 @@
+/* ===== GITHUB SECTION ===== */
+.github-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.github-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  margin: 2rem 0;
+}
+
+.github-stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.github-stat-card:hover {
+  border-color: var(--accent-gold-border);
+  box-shadow: var(--accent-gold-glow);
+}
+.github-stat-card img {
+  width: 100%;
+  display: block;
+}
+
+.github-heatmap {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+.github-heatmap img {
+  width: 100%;
+  min-width: 600px;
+}
+
+.github-platforms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.platform-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+}
+.platform-card:hover {
+  border-color: var(--accent-gold-border);
+  box-shadow: var(--accent-gold-glow);
+  transform: translateY(-2px);
+}
+
+.platform-emoji {
+  font-size: 1.5rem;
+  color: var(--accent-gold);
+  font-family: 'Fira Code', monospace;
+}
+.platform-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.platform-stat {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+}
+
+.github-hackathon-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: var(--accent-green);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 2rem 0 1rem;
+}
+
+.hackathon-wall {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.hackathon-card {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-radius: 14px;
+  background: var(--bg-card);
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+.hackathon-card:hover {
+  transform: translateY(-3px);
+}
+
+.hackathon-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent-gold);
+  font-family: 'Fira Code', monospace;
+}
+
+.hackathon-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.hackathon-status {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .github-stats-grid { grid-template-columns: 1fr; }
+  .hackathon-wall    { grid-template-columns: 1fr; }
+}

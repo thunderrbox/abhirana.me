@@ -1,0 +1,11 @@
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-green));
+  z-index: 10001;
+  will-change: width;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px var(--accent-gold);
+}

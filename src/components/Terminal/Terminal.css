@@ -1,0 +1,101 @@
+.term-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.term-window {
+  background: #080808;
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 12px;
+  width: min(720px, 95vw);
+  box-shadow: var(--accent-gold-glow), inset 0 0 60px rgba(232,182,58,0.02);
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.term-titlebar {
+  background: #111;
+  padding: 0.65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.term-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-block;
+}
+.term-btn.red    { background: #ff5f57; }
+.term-btn.yellow { background: #ffbd2e; }
+.term-btn.green  { background: #28ca41; }
+.term-title {
+  flex: 1;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.term-output {
+  padding: 1rem 1.2rem;
+  min-height: 280px;
+  max-height: 360px;
+  overflow-y: auto;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.82rem;
+  line-height: 2;
+  color: #f0ece4;
+}
+.term-output::-webkit-scrollbar { width: 3px; }
+.term-output::-webkit-scrollbar-thumb { background: var(--accent-gold-border); }
+
+.term-line { margin-bottom: 2px; }
+.term-line a { color: inherit; }
+
+.term-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 0.6rem 1.2rem;
+}
+.term-prompt {
+  color: var(--accent-gold);
+  font-size: 0.9rem;
+  user-select: none;
+}
+.term-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  color: #f0ece4;
+  font-size: 0.82rem;
+  font-family: 'Fira Code', monospace;
+  caret-color: var(--accent-gold);
+}
+.term-input::placeholder { color: var(--text-secondary); }
+
+/* Color helpers */
+.t-green  { color: var(--accent-gold); }
+.t-yellow { color: var(--accent-green); }

@@ -1,0 +1,179 @@
+.experience {
+  min-height: 100vh;
+  padding: 100px 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+.exp-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1000px;
+  margin-top: 50px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 40px;
+}
+
+/* TABS (LEFT) */
+.exp-tabs {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border-subtle);
+  padding-right: 20px;
+}
+
+.exp-tab {
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 15px 20px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  position: relative;
+  border-radius: 6px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.exp-tab:hover {
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+}
+
+.exp-tab-active {
+  color: var(--text-primary);
+  background: var(--bg-card-hover);
+  font-weight: 600;
+}
+
+.exp-tab-indicator {
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: 3px;
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+
+/* CONTENT (RIGHT) */
+.exp-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.exp-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid; /* color set dynamically in JSX */
+  margin-bottom: 30px;
+}
+
+.exp-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+.exp-title-block h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.exp-company {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.exp-company a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.exp-company a:hover {
+  text-decoration: underline;
+}
+
+.exp-date {
+  color: var(--text-secondary);
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85rem;
+}
+
+/* BULLETS */
+.exp-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.exp-bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.exp-bullet-marker {
+  font-size: 1.2rem;
+  line-height: 1.4;
+}
+
+.exp-bullet-item p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 800px) {
+  .exp-container {
+    flex-direction: column;
+    padding: 25px;
+  }
+  
+  .exp-tabs {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-right: 0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .exp-tab {
+    white-space: nowrap;
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
+  
+  .exp-tab-indicator {
+    left: 15%;
+    bottom: 0;
+    top: auto;
+    width: 70%;
+    height: 3px;
+  }
+}

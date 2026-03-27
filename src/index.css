@@ -1,0 +1,386 @@
+/* ===== FONTS ARE LOADED IN index.html ===== */
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-true-black:     #0e0e0e;
+  --bg-off-black:      #161616;
+  --bg-card:           #1a1a1a;
+  --bg-card-hover:     #222222;
+
+  --accent-gold:       #e8b63a;
+  --accent-gold-dim:   rgba(232,182,58,0.12);
+  --accent-gold-glow:  0 0 22px rgba(232,182,58,0.45);
+  --accent-gold-border:rgba(232,182,58,0.35);
+
+  --accent-cyan:       #00d4ff;
+  --glow-cyan:         0 0 20px rgba(0,212,255,0.4);
+
+  --accent-green:      #4ade80;
+  --green-dim:         rgba(74,222,128,0.10);
+  --green-glow:        0 0 20px rgba(74,222,128,0.4);
+  --green-border:      rgba(74,222,128,0.28);
+
+  --accent-amber:      #d4a534;
+  --lime-warm:         #b8cc42;
+
+  --text-primary:      #f0ece4;
+  --text-secondary:    #8a8577;
+  --text-code:         #e8b63a;
+  --border-subtle:     rgba(255,255,255,0.07);
+
+  --gradient-accent:   linear-gradient(135deg, var(--accent-gold), var(--accent-green));
+
+  --ambient-alpha-1:   rgba(204, 255, 0, 0.08);
+  --ambient-alpha-2:   rgba(204, 255, 0, 0.05);
+
+  --navbar-h: 68px;
+  --transition: 0.3s ease;
+}
+
+[data-theme="light"] {
+  /* Warm off-white — familiar to dark mode's paper feel */
+  --bg-true-black:     #f5f2eb;
+  --bg-off-black:      #ece8dd;
+  --bg-card:           #fdfaf4;
+  --bg-card-hover:     #f0ead8;
+
+  /* Gold — same hue, darker/richer for light BG contrast */
+  --accent-gold:       #c9920a;
+  --accent-gold-dim:   rgba(201, 146, 10, 0.12);
+  --accent-gold-glow:  0 0 22px rgba(201, 146, 10, 0.4);
+  --accent-gold-border:rgba(201, 146, 10, 0.4);
+
+  /* Green — richer, same family as dark mode #4ade80 */
+  --accent-green:      #18a050;
+  --green-dim:         rgba(24, 160, 80, 0.10);
+  --green-glow:        0 0 20px rgba(24, 160, 80, 0.35);
+  --green-border:      rgba(24, 160, 80, 0.35);
+
+  /* Lime-warm — same #ccff00 family, toned for light */
+  --accent-cyan:       #8da600;
+  --glow-cyan:         0 0 20px rgba(141, 166, 0, 0.4);
+
+  /* Text — warm dark */
+  --text-primary:      #1c1a14;
+  --text-secondary:    #5c5440;
+  --text-code:         #c9920a;
+  --border-subtle:     rgba(0, 0, 0, 0.10);
+
+  /* Gradient — same gold-to-green direction */
+  --gradient-accent:   linear-gradient(135deg, #c9920a, #18a050);
+
+  /* Ambient glows — gold on left, green on right (matches dark mode) */
+  --ambient-alpha-1:   rgba(201, 146, 10, 0.10);
+  --ambient-alpha-2:   rgba(24, 160, 80, 0.07);
+}
+
+/* ===== RESET ===== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--bg-true-black);
+  color: var(--text-primary);
+  font-family: 'Sora', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+  /* Smooth theme transition but NOT on initial paint — avoids flash */
+  transition: background 0.35s ease, color 0.35s ease;
+  position: relative;
+  /* Hint to browser for compositing */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== SCANLINE OVERLAY - hidden in light mode ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.025) 2px,
+    rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 99990;
+  animation: scanMove 8s linear infinite;
+  /* Performance: use GPU-composited properties only */
+  will-change: background-position;
+}
+
+[data-theme="light"] body::before {
+  display: none; /* Scanline is distracting on light background */
+}
+
+@keyframes scanMove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-true-black); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-gold), var(--accent-green));
+  border-radius: 2px;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1, h2, h3, h4, h5 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+code, pre, .mono {
+  font-family: 'Fira Code', monospace;
+}
+
+/* ===== SECTION BASE ===== */
+section {
+  padding: 7rem 5%;
+  position: relative;
+}
+
+.section-tag {
+  font-family: 'Fira Code', monospace;
+  color: var(--accent-gold);
+  font-size: 0.78rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.section-sub {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 560px;
+  font-size: 0.95rem;
+}
+
+.grad-div {
+  height: 1px;
+  margin: 0 5%;
+  background: linear-gradient(90deg, transparent, var(--accent-gold), var(--accent-green), transparent);
+  opacity: 0.15;
+}
+
+/* ===== GLASS CARD ===== */
+.glass {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+/* ===== MORPHING BORDER ANIMATION ===== */
+@keyframes morphBorder {
+  0%, 100% { border-color: var(--accent-gold-border); }
+  50%       { border-color: var(--green-border); }
+}
+
+.morph-border {
+  animation: morphBorder 4s ease-in-out infinite;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background: var(--accent-gold);
+  color: #0e0e0e;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.5px;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--accent-gold-glow);
+}
+
+.btn-outline-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background: transparent;
+  color: var(--accent-gold);
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+  background: linear-gradient(var(--bg-true-black), var(--bg-true-black)) padding-box,
+              linear-gradient(135deg, var(--accent-gold), var(--accent-green)) border-box;
+  border: 1.5px solid transparent;
+}
+.btn-outline-green:hover {
+  background: var(--accent-gold-dim);
+  box-shadow: var(--accent-gold-glow);
+  transform: translateY(-2px);
+}
+
+.btn-outline-yellow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.8rem;
+  background: transparent;
+  color: var(--accent-green);
+  font-weight: 600;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  border: 1.5px solid var(--accent-green);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-outline-yellow:hover {
+  background: var(--green-dim);
+  box-shadow: var(--green-glow);
+  transform: translateY(-2px);
+}
+
+/* ===== SECTION REVEAL ===== */
+.reveal-wrap {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal-wrap.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== GLITCH ===== */
+@keyframes glitch1 {
+  0%,100% { clip-path: inset(0 0 98% 0); transform: translate(-1px, 0); }
+  25%     { clip-path: inset(30% 0 50% 0); transform: translate(2px, 0); }
+  50%     { clip-path: inset(60% 0 10% 0); transform: translate(-1px, 0); }
+  75%     { clip-path: inset(80% 0 5% 0); transform: translate(1px, 0); }
+}
+@keyframes glitch2 {
+  0%,100% { clip-path: inset(90% 0 2% 0); transform: translate(2px, 0); }
+  25%     { clip-path: inset(10% 0 70% 0); transform: translate(-2px, 0); }
+  50%     { clip-path: inset(40% 0 40% 0); transform: translate(1px, 0); }
+  75%     { clip-path: inset(70% 0 20% 0); transform: translate(-1px, 0); }
+}
+
+/* ===== PULSE ===== */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.95); }
+}
+
+/* ===== BLINK CURSOR ===== */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ===== TICKER ===== */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ===== SPIN ===== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== BOUNCE ===== */
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(-10px); }
+}
+
+/* ===== DRAW LINE ===== */
+@keyframes drawLine {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  section { padding: 5rem 5%; }
+  body    { cursor: auto; }
+}
+
+/* ===== AMBIENT SIDE GLOWS ===== */
+.ambient-glow {
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -10;
+  filter: blur(140px);
+  opacity: 0.12;
+}
+
+/* AMBIENT BACKGROUND GLOWS */
+.ambient-glow-left {
+  position: fixed;
+  top: -10vw;
+  left: -10vw;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle at center, var(--ambient-alpha-1) 0%, rgba(0,0,0,0) 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.ambient-glow-right {
+  position: fixed;
+  bottom: -10vw;
+  right: -10vw;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle at center, var(--ambient-alpha-2) 0%, rgba(0,0,0,0) 70%);
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

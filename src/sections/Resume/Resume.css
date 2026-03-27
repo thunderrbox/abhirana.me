@@ -1,0 +1,51 @@
+/* ===== RESUME SECTION ===== */
+.resume {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.resume-preview {
+  width: 100%;
+  height: 520px;
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  margin: 2rem 0;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.resume-updated {
+  display: inline-block;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.resume-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.resume-highlight-chip {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.7rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--accent-gold-dim);
+  border: 1px solid var(--accent-gold-border);
+  border-radius: 4px;
+  color: var(--accent-gold);
+}
