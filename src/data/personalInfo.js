@@ -24,7 +24,7 @@ export const PERSONAL_INFO = {
   leetcode: 'https://leetcode.com/u/Abhijeet_rana/',
   gfg: 'https://www.geeksforgeeks.org/user/abhijeetrana/',
   
-  resumePdf: import.meta.env.BASE_URL + 'resume.pdf',
+  resumePdf: '/resume.pdf',
   
   stats: [
     { value: 500, suffix: '+', label: 'Problems Solved' },

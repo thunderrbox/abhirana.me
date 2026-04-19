@@ -24,15 +24,20 @@ export default function Resume() {
           </a>
         </div>
         <div className="resume-viewer">
-          {/* using object instead of iframe for better PDF rendering on desktop */}
-          <object data={PERSONAL_INFO.resumePdf} type="application/pdf" width="100%" height="100%">
+          <iframe 
+            src={PERSONAL_INFO.resumePdf} 
+            title="Resume PDF"
+            width="100%" 
+            height="100%" 
+            style={{ border: 'none' }}
+          >
             <div className="resume-fallback">
               <p>Your browser doesn't support built-in PDF viewers.</p>
               <a href={PERSONAL_INFO.resumePdf} className="btn-outline" download="Abhijeet_Singh_Rana_Resume.pdf">
                 Download Resume Instead
               </a>
             </div>
-          </object>
+          </iframe>
         </div>
       </FadeUp>
     </section>
