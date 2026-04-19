@@ -7,13 +7,32 @@ export default function About() {
     <section className="about" id="about">
       <FadeUp>
         <span className="section-eyebrow">About</span>
-        <h2 className="section-title">The Engineer Behind the Code</h2>
+        <h2 className="section-title">{PERSONAL_INFO.name}</h2>
       </FadeUp>
 
       <div className="about-grid">
         <FadeUp className="about-card about-story" delay={0.1}>
+          <h3 className="about-card-title">{PERSONAL_INFO.name}</h3>
           <p className="about-bio">{PERSONAL_INFO.bio}</p>
           <p className="about-bio">{PERSONAL_INFO.bioExtended}</p>
+          
+          <div className="about-job-status mt-4" style={{ 
+            marginTop: '24px', 
+            display: 'inline-flex', 
+            alignItems: 'center', 
+            gap: '8px', 
+            background: 'var(--accent-primary-dim)', 
+            border: '1px solid var(--accent-primary-border)',
+            padding: '10px 20px', 
+            borderRadius: '999px',
+            color: 'var(--accent-primary)',
+            fontFamily: 'var(--font-mono)',
+            fontSize: 'var(--text-xs)',
+            fontWeight: '600'
+          }}>
+            <span style={{ width: '8px', height: '8px', background: 'var(--accent-primary)', borderRadius: '50%', boxShadow: 'var(--accent-primary-glow)', animation: 'pulse 2s infinite' }} />
+            Open for Jobs & Internships
+          </div>
         </FadeUp>
 
         <FadeUp className="about-card about-info" delay={0.2}>

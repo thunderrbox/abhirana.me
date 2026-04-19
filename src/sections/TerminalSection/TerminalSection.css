@@ -1,0 +1,99 @@
+/* ===== TERMINAL SECTION ===== */
+.terminal-section {
+  padding-bottom: 80px;
+}
+
+.terminal-window {
+  margin-top: 40px;
+  background: #030303; /* Extremely dark for the terminal */
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+}
+
+.terminal-header {
+  background: var(--bg-hover);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 8px;
+  position: absolute;
+  left: 24px;
+}
+
+.term-btn {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.term-btn.close { background: #FF5F56; }
+.term-btn.min { background: #FFBD2E; }
+.term-btn.max { background: #27C93F; }
+
+.terminal-title {
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.terminal-body {
+  padding: 24px;
+  height: 400px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--accent-primary); /* Acid green text inside the dark window */
+  line-height: 1.6;
+  cursor: text;
+}
+
+/* Custom scrollbar for terminal */
+.terminal-body::-webkit-scrollbar { width: 6px; }
+.terminal-body::-webkit-scrollbar-track { background: transparent; }
+.terminal-body::-webkit-scrollbar-thumb { background: var(--bg-hover); border-radius: 4px; }
+
+.terminal-line {
+  margin-bottom: 8px;
+  word-wrap: break-word;
+}
+
+.terminal-line.user {
+  color: var(--text-primary);
+}
+
+.terminal-line.system {
+  color: var(--accent-primary);
+}
+
+.prompt {
+  color: var(--accent-emerald);
+  margin-right: 8px;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.terminal-input-line input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  outline: none;
+}

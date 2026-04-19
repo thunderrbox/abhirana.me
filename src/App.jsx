@@ -6,6 +6,7 @@ import Skills from './sections/Skills/Skills.jsx';
 import Blogs from './sections/Blogs/Blogs.jsx';
 import Experience from './sections/Experience/Experience.jsx';
 import Education from './sections/Education/Education.jsx';
+import TerminalSection from './sections/TerminalSection/TerminalSection.jsx';
 import Resume from './sections/Resume/Resume.jsx';
 import Contact from './sections/Contact/Contact.jsx';
 import Footer from './sections/Footer/Footer.jsx';
@@ -26,6 +27,7 @@ function App() {
         <Blogs />
         <Experience />
         <Education />
+        <TerminalSection />
         <Resume />
         <Contact />
       </main>
