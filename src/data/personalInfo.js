@@ -20,7 +20,7 @@ export const PERSONAL_INFO = {
   phone: '+91 9696146006',
   email: 'abhijeet.s.r.cse@gmail.com',
   github: 'https://github.com/thunderrbox',
-  linkedin: 'https://www.linkedin.com/in/abhi-s-rana',
+  linkedin: 'https://www.linkedin.com/in/abhi-s-rana/',
   leetcode: 'https://leetcode.com/u/Abhijeet_rana/',
   gfg: 'https://www.geeksforgeeks.org/user/abhijeetrana/',
   

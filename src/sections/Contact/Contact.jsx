@@ -49,6 +49,12 @@ export default function Contact() {
                 </span>
               </div>
               <div className="contact-method">
+                <span className="contact-method-label">Phone</span>
+                <span className={`contact-method-value ${!isUnlocked ? 'concealed' : ''}`}>
+                  {isUnlocked ? PERSONAL_INFO.phone : '+91 ••••• •••••'}
+                </span>
+              </div>
+              <div className="contact-method">
                 <span className="contact-method-label">LinkedIn</span>
                 <span className={`contact-method-value ${!isUnlocked ? 'concealed' : ''}`}>
                   {isUnlocked ? 'linkedin.com/in/abhi-s-rana' : 'linkedin.com/in/••••••'}

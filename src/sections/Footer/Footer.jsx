@@ -29,6 +29,8 @@ export default function Footer() {
         <p className="footer-details" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
           <span>{PERSONAL_INFO.email}</span>
           <span className="footer-dot hidden-mobile">•</span>
+          <span>{PERSONAL_INFO.phone}</span>
+          <span className="footer-dot hidden-mobile">•</span>
           <span>{PERSONAL_INFO.location}</span>
           <span className="footer-dot hidden-mobile">•</span>
           <span>Open for Roles</span>
