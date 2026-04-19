@@ -1,22 +1,18 @@
-import { motion } from 'framer-motion';
+import { useRef, useCallback } from 'react';
+import { useIntersectionObserver } from '../../hooks/useIntersectionObserver.js';
 
-export default function FadeUp({ children, className = '', delay = 0, yOffset = 30, once = true }) {
-  // Spring physics for a highly premium, smooth bounce effect on render
+export default function FadeUp({ children, className = '', delay = 0, yOffset = 30, stagger = false, staggerDelay = 0.08 }) {
+  const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
+
+  const style = {
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'translateY(0)' : `translateY(${yOffset}px)`,
+    transition: `opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`,
+  };
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: yOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once, margin: "-100px" }}
-      transition={{
-        duration: 0.7,
-        delay: delay,
-        type: "spring",
-        stiffness: 70,
-        damping: 15,
-      }}
-    >
+    <div ref={ref} className={className} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }

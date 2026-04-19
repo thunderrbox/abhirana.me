@@ -1,118 +1,131 @@
-import { useState, useMemo, useEffect } from 'react';
-import Tilt from 'react-parallax-tilt';
+import { useState } from 'react';
 import FadeUp from '../../components/FadeUp/FadeUp.jsx';
-import { PROJECTS, PROJECT_FILTERS } from '../../data/projects.js';
+import { PROJECTS } from '../../data/projects.js';
 import './Projects.css';
 
-function ProjectCard({ project, onClick }) {
+function ProjectCard({ project, index, onClick }) {
   return (
-    <Tilt
-      tiltMaxAngleX={8}
-      tiltMaxAngleY={8}
-      scale={1.02}
-      transitionSpeed={400}
-      className="project-tilt-wrapper"
-      glareEnable={true}
-      glareMaxOpacity={0.15}
-      glareColor="rgba(232, 182, 58, 0.4)"
-      glarePosition="all"
-    >
-      <div
-        className="project-card"
-        onClick={() => onClick(project)}
-        style={{ transition: 'border-color 0.3s, box-shadow 0.3s' }}
-      >
-        <div className="project-thumb" style={{ background: project.color }}>
-          <span className="project-thumb-icon">{project.icon}</span>
-          <span className={`project-status ${project.status}`}>{project.status}</span>
-          {project.featured && <span className="project-featured">⭐</span>}
-        </div>
-        <div className="project-body">
-          <div className="project-title-row">
-            <span className="project-title">{project.title}</span>
-            <span className="project-diff">{project.difficulty}</span>
+    <FadeUp delay={0.1 + index * 0.1}>
+      <div className={`project-card ${project.featured ? 'featured' : ''}`} onClick={() => onClick(project)}>
+        <div className="project-card-header">
+          <div className="project-card-meta">
+            <span className={`project-status-badge ${project.status}`}>
+              {project.status === 'ongoing' ? '● In Progress' : '✓ Completed'}
+            </span>
+            <span className="project-year">{project.year}</span>
           </div>
-          <p className="project-tagline">{project.tagline}</p>
-          <div className="project-stack">
-            {project.stack.map((t) => (
-              <span key={t} className="project-stack-chip">{t}</span>
+          <h3 className="project-card-title">{project.title}</h3>
+          <p className="project-card-subtitle">{project.subtitle}</p>
+        </div>
+
+        <div className="project-card-body">
+          <div className="project-storytelling">
+            <div className="project-story-item">
+              <span className="project-story-label">Problem</span>
+              <p className="project-story-text">{project.problem}</p>
+            </div>
+            <div className="project-story-item">
+              <span className="project-story-label">Solution</span>
+              <p className="project-story-text">{project.solution}</p>
+            </div>
+          </div>
+
+          {project.architecture && (
+            <div className="project-architecture">
+              <span className="project-arch-label">Architecture</span>
+              <code className="project-arch-flow">{project.architecture}</code>
+            </div>
+          )}
+        </div>
+
+        <div className="project-card-footer">
+          <div className="project-stack-pills">
+            {project.stack.map(tech => (
+              <span key={tech} className="project-tech-pill">{tech}</span>
             ))}
           </div>
-          <div className="project-links">
-            {project.github && project.github !== '#' && (
-              <a
-                href={project.github}
-                className="project-link"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                🐙 GitHub
+          <div className="project-card-links">
+            {project.github && (
+              <a href={project.github} className="project-link-btn" target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+                GitHub ↗
               </a>
             )}
-            {project.demo && project.demo !== '#' && (
-              <a
-                href={project.demo}
-                className="project-link"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                🚀 Live Demo
+            {project.demo && (
+              <a href={project.demo} className="project-link-btn primary" target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()}>
+                Live Demo ↗
               </a>
             )}
           </div>
         </div>
       </div>
-    </Tilt>
+    </FadeUp>
   );
 }
 
 function ProjectModal({ project, onClose }) {
-  useEffect(() => {
-    const handleEsc = (e) => { if (e.key === 'Escape') onClose(); };
-    document.addEventListener('keydown', handleEsc);
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', handleEsc);
-      document.body.style.overflow = '';
-    };
-  }, [onClose]);
+  if (!project) return null;
 
   return (
     <div className="project-modal-overlay" onClick={onClose}>
-      <div className="project-modal" onClick={(e) => e.stopPropagation()}>
-        <div className="project-modal-header" style={{ background: project.color }}>
-          <span className="project-modal-header-icon">{project.icon}</span>
-          <button className="project-modal-close" onClick={onClose}>✕</button>
-        </div>
-        <div className="project-modal-body">
+      <div className="project-modal" onClick={e => e.stopPropagation()}>
+        <button className="project-modal-close" onClick={onClose}>✕</button>
+
+        <div className="project-modal-content">
+          <span className={`project-status-badge ${project.status}`}>
+            {project.status === 'ongoing' ? '● In Progress' : '✓ Completed'}
+          </span>
           <h3 className="project-modal-title">{project.title}</h3>
-          <p className="project-modal-tagline">{project.tagline}</p>
-          <p className="project-modal-desc">{project.description}</p>
+          <p className="project-modal-subtitle">{project.subtitle}</p>
+
+          <div className="project-modal-sections">
+            <div className="project-modal-section">
+              <h4>The Problem</h4>
+              <p>{project.problem}</p>
+            </div>
+            <div className="project-modal-section">
+              <h4>The Solution</h4>
+              <p>{project.solution}</p>
+            </div>
+            {project.architecture && (
+              <div className="project-modal-section">
+                <h4>Architecture</h4>
+                <code className="project-arch-flow modal">{project.architecture}</code>
+              </div>
+            )}
+            <div className="project-modal-section">
+              <h4>Impact</h4>
+              <p>{project.impact}</p>
+            </div>
+            {project.techDecisions && project.techDecisions.length > 0 && (
+              <div className="project-modal-section">
+                <h4>Tech Decisions</h4>
+                <div className="project-tech-decisions">
+                  {project.techDecisions.map((td, i) => (
+                    <div key={i} className="tech-decision-item">
+                      <span className="tech-decision-name">{td.tech}</span>
+                      <span className="tech-decision-why">{td.why}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
 
           <div className="project-modal-stack">
-            {project.stack.map((t) => (
-              <span key={t} className="project-stack-chip">{t}</span>
+            {project.stack.map(tech => (
+              <span key={tech} className="project-tech-pill">{tech}</span>
             ))}
           </div>
 
-          {project.learned && (
-            <div className="project-modal-learned">
-              <div className="project-modal-learned-title">💡 What I Learned</div>
-              <p>{project.learned}</p>
-            </div>
-          )}
-
           <div className="project-modal-actions">
-            {project.github && project.github !== '#' && (
-              <a href={project.github} className="btn-outline-green" target="_blank" rel="noopener noreferrer">
-                🐙 View on GitHub
+            {project.github && (
+              <a href={project.github} className="btn-outline" target="_blank" rel="noopener noreferrer">
+                View on GitHub ↗
               </a>
             )}
-            {project.demo && project.demo !== '#' && (
+            {project.demo && (
               <a href={project.demo} className="btn-primary" target="_blank" rel="noopener noreferrer">
-                🚀 Live Demo
+                Live Demo ↗
               </a>
             )}
           </div>
@@ -123,42 +136,24 @@ function ProjectModal({ project, onClose }) {
 }
 
 export default function Projects() {
-  const [filter, setFilter] = useState('all');
   const [selected, setSelected] = useState(null);
-
-  const filtered = useMemo(
-    () => (filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.type === filter)),
-    [filter]
-  );
 
   return (
     <section className="projects" id="projects">
-      <FadeUp className="reveal-wrap visible" delay={0.1}>
-        <span className="section-tag">&gt; projects.map()</span>
+      <FadeUp>
+        <span className="section-eyebrow">Projects</span>
         <h2 className="section-title">What I've Built</h2>
-        <p className="section-sub">
-          Each project is battle-tested with real architecture decisions — Docker,
-          Redis, graphs, and DSA under the hood.
+        <p className="section-subtitle">
+          Each project reflects real architecture decisions — Docker sandboxing,
+          async job queues, graph algorithms, and production-grade design patterns.
         </p>
-
-        <div className="projects-filters">
-          {PROJECT_FILTERS.map((f) => (
-            <button
-              key={f.key}
-              className={`projects-filter-btn ${filter === f.key ? 'active' : ''}`}
-              onClick={() => setFilter(f.key)}
-            >
-              {f.label}
-            </button>
-          ))}
-        </div>
-
-        <div className="projects-grid">
-          {filtered.map((p) => (
-            <ProjectCard key={p.id} project={p} onClick={setSelected} />
-          ))}
-        </div>
       </FadeUp>
+
+      <div className="projects-list">
+        {PROJECTS.map((p, i) => (
+          <ProjectCard key={p.id} project={p} index={i} onClick={setSelected} />
+        ))}
+      </div>
 
       {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
     </section>

@@ -1,48 +1,36 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 import { PERSONAL_INFO } from '../../data/personalInfo.js';
 import './Navbar.css';
 
 const NAV_LINKS = [
-  { label: 'About',      href: '/#about',     id: 'about' },
-  { label: 'Skills',     href: '/#skills',    id: 'skills' },
-  { label: 'Projects',   href: '/#projects',  id: 'projects' },
-  { label: 'Playground', href: '/#blogs',     id: 'blogs' },
-  { label: 'Education',  href: '/#education', id: 'education' },
-  { label: 'Contact',    href: '/contact',    id: 'contact' },
+  { label: 'About',      href: '#about' },
+  { label: 'Projects',   href: '#projects' },
+  { label: 'Skills',     href: '#skills' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Contact',    href: '#contact' },
 ];
 
-export default function Navbar({ onTerminalOpen }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [active, setActive]     = useState('');
+  const [active, setActive] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme]       = useState('dark');
-  const location = useLocation();
+  const [theme, setTheme] = useState('dark');
 
-  // Scroll spy to highlight active section on the home page
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
-      
-      // Only do scroll spy if we are on the homepage
-      if (location.pathname === '/') {
-        const sections = ['hero', 'about', 'skills', 'projects', 'blogs', 'education', 'resume'];
-        let cur = '';
-        sections.forEach(id => {
-          const el = document.getElementById(id);
-          if (el && window.scrollY >= el.offsetTop - 120) cur = id;
-        });
-        setActive(cur);
-      } else {
-        // If we are on a different route (e.g. /contact), set active to the path name
-        setActive(location.pathname.slice(1));
-      }
+      const sections = ['about', 'projects', 'skills', 'experience', 'contact'];
+      let cur = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 200) cur = id;
+      });
+      setActive(cur);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-    // Trigger once on mount/location change to set correct initial active state
-    onScroll(); 
+    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
-  }, [location.pathname]);
+  }, []);
 
   const toggleTheme = () => {
     const next = theme === 'dark' ? 'light' : 'dark';
@@ -57,62 +45,36 @@ export default function Navbar({ onTerminalOpen }) {
     document.documentElement.setAttribute('data-theme', saved);
   }, []);
 
-  // Use native anchor links for cross-page hash navigation, to ensure it navigates to / and scrolls
-  const handleLogoClick = (e) => {
-    if (location.pathname === '/' && window.scrollY === 0) {
-      e.preventDefault();
-    }
-  };
-
   return (
     <>
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
-        <a href={`${import.meta.env.BASE_URL}#hero`} className="nav-logo" onClick={handleLogoClick}>
-          <span className="logo-asr">RANA</span><span className="logo-dot">.me</span>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
+        <a href="#hero" className="nav-logo">
+          <span className="logo-name">AR</span>
+          <span className="logo-dot">.</span>
         </a>
 
         <ul className="nav-links">
           {NAV_LINKS.map(l => (
             <li key={l.href}>
-              {l.href.startsWith('/#') ? (
-                <a
-                  href={`${import.meta.env.BASE_URL}${l.href.substring(1)}`}
-                  className={active === l.id ? 'active' : ''}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {l.label}
-                </a>
-              ) : (
-                <Link
-                  to={l.href}
-                  className={active === l.id ? 'active' : ''}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {l.label}
-                </Link>
-              )}
+              <a
+                href={l.href}
+                className={active === l.href.slice(1) ? 'active' : ''}
+                onClick={() => setMenuOpen(false)}
+              >
+                {l.label}
+              </a>
             </li>
           ))}
         </ul>
 
         <div className="nav-right">
-          <button
-            className="nav-terminal-btn"
-            onClick={onTerminalOpen}
-            title="Open Terminal (Ctrl+Alt+T)"
-            aria-label="Open Terminal"
-          >
-            <span className="mono">&gt;_</span>
-          </button>
-          <button className="theme-btn" onClick={toggleTheme} aria-label="Toggle theme">
-            {theme === 'dark' ? '☀️' : '🌙'}
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
+            <span className="theme-icon">{theme === 'dark' ? '☀' : '◑'}</span>
           </button>
           <a
             href={PERSONAL_INFO.resumePdf}
-            className="btn-outline-green nav-resume-btn"
+            className="btn-primary nav-resume-btn"
             download="Abhijeet_Singh_Rana_Resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             Resume ↓
           </a>
@@ -131,24 +93,13 @@ export default function Navbar({ onTerminalOpen }) {
       {/* Mobile menu */}
       <div className={`mob-menu ${menuOpen ? 'open' : ''}`}>
         {NAV_LINKS.map(l => (
-          l.href.startsWith('/#') ? (
-            <a key={l.href} href={`${import.meta.env.BASE_URL}${l.href.substring(1)}`} onClick={() => setMenuOpen(false)}>
-              {l.label}
-            </a>
-          ) : (
-            <Link key={l.href} to={l.href} onClick={() => setMenuOpen(false)}>
-              {l.label}
-            </Link>
-          )
+          <a key={l.href} href={l.href} onClick={() => setMenuOpen(false)}>
+            {l.label}
+          </a>
         ))}
         <a href={PERSONAL_INFO.resumePdf} download="Abhijeet_Singh_Rana_Resume.pdf" className="mob-resume">
-          ⬇ Resume PDF
+          ↓ Download Resume
         </a>
-      </div>
-      {/* Available badge */}
-      <div className="avail-badge" onClick={() => { document.getElementById('contact')?.scrollIntoView({ behavior:'smooth' }); }}>
-        <span className="avail-dot" />
-        Available for Internships
       </div>
     </>
   );

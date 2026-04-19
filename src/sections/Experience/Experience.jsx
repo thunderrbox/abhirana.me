@@ -1,136 +1,78 @@
-import { useState } from 'react';
 import FadeUp from '../../components/FadeUp/FadeUp.jsx';
 import './Experience.css';
 
 const EXPERIENCES = [
   {
-    name: 'Docker Code Engine',
+    title: 'Docker-Sandboxed Code Execution Engine',
     role: 'Systems Architecture',
-    url: '#',
-    start: '2024',
-    end: 'Present',
-    color: 'var(--accent-gold)',
-    icon: '🐳',
-    shortDescription: [
-      'Architected and built a highly-scalable, Docker-sandboxed code execution engine from scratch to securely run user-submitted code.',
-      'Engineered robust container isolation to prevent malicious code escalation and ensure deterministic execution environments.',
-      'Implemented system-level protections including strict memory limits, timeouts, and network constraints for safe remote compilation.'
+    period: '2024 — Present',
+    highlights: [
+      'Architected a Docker-sandboxed execution engine for safe, isolated code execution with strict memory limits and timeouts',
+      'Engineered container lifecycle management with deterministic execution environments and network constraints',
+      'Designed async submission pipeline with Redis + BullMQ for scalable concurrent job processing',
     ],
   },
   {
-    name: 'CPU Schedulers',
-    role: 'OS Development',
-    url: '#',
-    start: '2024',
-    end: '2024',
-    color: 'var(--accent-green)',
-    icon: '⚙️',
-    shortDescription: [
-      'Engineered 6 different CPU scheduling algorithms entirely from scratch to deeply understand operating system internals and resource pooling.',
-      'Implemented First-Come First-Served (FCFS), Shortest Job First (SJF), Priority Scheduling, and Round Robin (RR) algorithms in raw C++.',
-      'Analyzed context switching overhead, turnaround time, and algorithmic efficiency across simulated process loads.'
+    title: 'CPU Scheduling Algorithm Platform',
+    role: 'OS & Algorithm Development',
+    period: '2024',
+    highlights: [
+      'Implemented 6 CPU scheduling algorithms from scratch (FCFS, SJF, SRTF, Round Robin, Priority, MLQ)',
+      'Built graph-based dependency resolution using topological sort for process ordering',
+      'Designed heap-driven priority queues for O(log n) dynamic process optimization',
     ],
   },
   {
-    name: 'Algorithmic Problem Solving',
-    role: 'Competitive Programmer',
-    url: 'https://leetcode.com/u/thunderrbox/',
-    start: '2023',
-    end: 'Present',
-    color: 'var(--accent-cyan)',
-    icon: '⚡',
-    shortDescription: [
-      'Achieved a peak LeetCode rating of 1590 by consistently participating in weekly contests and algorithmic challenges under time pressure.',
-      'Successfully ground through over 500+ complex data structure and algorithm problems across various competitive coding platforms.',
-      'Mastered advanced patterns including Dynamic Programming, Graph Theory, Sliding Window, and Tree traversal techniques.'
+    title: 'Competitive Programming',
+    role: 'Algorithmic Problem Solving',
+    period: '2023 — Present',
+    highlights: [
+      'Achieved LeetCode peak rating of 1590 through consistent contest participation',
+      'Solved 500+ problems spanning DP, Graph Theory, Trees, Sliding Window, and Two Pointers',
+      'Mastered advanced patterns including Segment Trees, Union-Find, and Monotonic Stacks',
     ],
   },
   {
-    name: 'ISRO Space Hackathon',
-    role: 'Participant / Innovator',
-    url: '#',
-    start: '2024',
-    end: '2024',
-    color: 'var(--accent-gold)',
-    icon: '🚀',
-    shortDescription: [
-      'Selected to participate in the prestigious ISRO Space Hackathon, tackling complex challenges involving real satellite metrics.',
-      'Collaborated seamlessly with a highly focused team to design algorithmic approaches to spatial problem statements under strict time constraints.'
+    title: 'Hackathon Participation',
+    role: 'ISRO · Adobe · TVS E.P.I.C',
+    period: '2023 — 2024',
+    highlights: [
+      'ISRO Space Hackathon — Designed algorithmic solutions for satellite data processing challenges',
+      'Adobe India Hackathon — Prototyped creative and technical solutions for digital experiences',
+      'TVS E.P.I.C 7.0 — Built architectural approaches for industry-specific mobility problems',
     ],
   },
-  {
-    name: 'Corporate Hackathons',
-    role: 'Participant',
-    url: '#',
-    start: '2023',
-    end: '2024',
-    color: 'var(--accent-green)',
-    icon: '💡',
-    shortDescription: [
-      'Participated in the Adobe India Hackathon, rapidly prototyping both creative and technical solutions for digital experiences.',
-      'Competed in TVS E.P.I.C 7.0, designing robust architectural approaches to solve dense, industry-specific mobility problem statements.'
-    ],
-  }
 ];
 
 export default function Experience() {
-  const [selected, setSelected] = useState(0);
-
   return (
     <section className="experience" id="experience">
-      <FadeUp delay={0.1}>
-        <span className="section-tag">&gt; experience.log</span>
+      <FadeUp>
+        <span className="section-eyebrow">Experience</span>
         <h2 className="section-title">Milestones & Builds</h2>
-
-        <div className="exp-container">
-          {/* Left: Tab list */}
-          <div className="exp-tabs">
-            {EXPERIENCES.map((exp, index) => (
-              <button
-                key={index}
-                className={`exp-tab ${index === selected ? 'exp-tab-active' : ''}`}
-                onClick={() => setSelected(index)}
-              >
-                <div className="exp-tab-indicator" style={{ 
-                  backgroundColor: index === selected ? exp.color : 'transparent',
-                  boxShadow: index === selected ? `0 0 10px ${exp.color}` : 'none'
-                }} />
-                {exp.name}
-              </button>
-            ))}
-          </div>
-
-          {/* Right: Content details */}
-          <div className="exp-content">
-            <div className="exp-header" style={{ borderBottomColor: EXPERIENCES[selected].color }}>
-              <div className="exp-icon" style={{ color: EXPERIENCES[selected].color }}>
-                {EXPERIENCES[selected].icon}
-              </div>
-              <div className="exp-title-block">
-                <h3>
-                  {EXPERIENCES[selected].role}
-                  <span className="exp-company">
-                    {' @ '}
-                    <a href={EXPERIENCES[selected].url} target="_blank" rel="noreferrer">
-                      {EXPERIENCES[selected].name}
-                    </a>
-                  </span>
-                </h3>
-                <p className="exp-date">{EXPERIENCES[selected].start} — {EXPERIENCES[selected].end}</p>
-              </div>
-            </div>
-
-            <div className="exp-bullets">
-              {EXPERIENCES[selected].shortDescription.map((desc, i) => (
-                <div key={i} className="exp-bullet-item">
-                  <span className="exp-bullet-marker" style={{ color: EXPERIENCES[selected].color }}>▹</span>
-                  <p>{desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <p className="section-subtitle">
+          Key engineering milestones, from systems architecture to algorithmic problem solving.
+        </p>
       </FadeUp>
+
+      <div className="experience-timeline">
+        {EXPERIENCES.map((exp, i) => (
+          <FadeUp key={i} className="exp-card" delay={0.1 + i * 0.1}>
+            <div className="exp-card-left">
+              <span className="exp-period">{exp.period}</span>
+              <span className="exp-role">{exp.role}</span>
+            </div>
+            <div className="exp-card-right">
+              <h3 className="exp-title">{exp.title}</h3>
+              <ul className="exp-highlights">
+                {exp.highlights.map((h, j) => (
+                  <li key={j} className="exp-highlight">{h}</li>
+                ))}
+              </ul>
+            </div>
+          </FadeUp>
+        ))}
+      </div>
     </section>
   );
 }

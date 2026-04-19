@@ -1,14 +1,20 @@
 export const PERSONAL_INFO = {
   name: 'Abhijeet Singh Rana',
-  shortName: 'RANA',
+  firstName: 'Abhijeet',
+  lastName: 'Singh Rana',
   handle: 'thunderrbox',
-  tagline: 'Software Engineer | DSA × Full Stack Developer',
-  bio1: "I'm Abhijeet Singh Rana — a Software Engineer from Kanpur, India. I write code the way competitive programmers think: obsessed with efficiency, correctness, and elegance.",
-  bio2: "I've built a Docker-sandboxed code execution engine, implemented 6 CPU scheduling algorithms from scratch, and solved 500+ algorithmic problems (LeetCode peak: 1590). Beyond systems work, I actively use prompt engineering — crafting precise AI prompts to accelerate development, debug logic, generate boilerplate, design APIs, and automate repetitive tasks. AI is a tool; I've learned to wield it.",
-  positioning: 'Production-grade code. DSA-hardened thinking. Zero excuses.',
-  currentlyBuilding: 'Code & Feedback Platform (Redis · BullMQ · Docker)',
+  title: 'Backend Engineer',
+  tagline: 'Building production-grade systems with DSA-hardened thinking.',
+  heroSubtitle: 'I architect scalable backend systems, solve complex algorithmic problems, and write code that runs in production — not just in demos.',
+  
+  bio: "I'm a Software Engineer from Kanpur, India, obsessed with building things that work at scale. From Docker-sandboxed execution engines to graph-based scheduling algorithms, I focus on systems that are correct, efficient, and production-ready.",
+  bioExtended: "With 500+ algorithmic problems solved and a LeetCode peak rating of 1590, I bring competitive programming rigor to every system I design. I believe great backend engineering isn't just about making things work — it's about making them work reliably under pressure.",
+  
+  positioning: 'Production-grade code. DSA-hardened thinking. Systems that scale.',
+  currentlyBuilding: 'Code & Feedback Platform — Docker · Redis · BullMQ',
+  
   college: 'Pranveer Singh Institute of Technology, Kanpur',
-  degree: 'Computer Science & Engineering',
+  degree: 'B.Tech, Computer Science & Engineering',
   cgpa: '7.25 / 10',
   location: 'Kanpur, Uttar Pradesh, India',
   phone: '+91 9696146006',
@@ -18,37 +24,20 @@ export const PERSONAL_INFO = {
   leetcode: 'https://leetcode.com/u/Abhijeet_rana/',
   gfg: 'https://www.geeksforgeeks.org/user/abhijeetrana/',
   
-  // 📄 HOW TO UPDATE YOUR RESUME:
-  // 1. Delete the default 'resume.pdf' from the "d:\Portfolio\public" folder.
-  // 2. Paste your real resume PDF file into the "d:\Portfolio\public" folder.
-  // 3. Make sure your real file is exacty named "resume.pdf" (all lowercase).
-  // 4. The download buttons and the Resume section viewer will update automatically!
   resumePdf: import.meta.env.BASE_URL + 'resume.pdf',
-  funFacts: [
-    '◆ 500+ Problems Solved',
-    '◇ LeetCode Peak 1590',
-    '→ ISRO Hackathon Participant',
-    '⊡ Docker Sandboxed Execution',
-    '◎ DSA-First Mindset',
-    '∞ Night Build Sessions',
-    '◉ Competitive Programmer',
-    '⊛ Systems Thinker',
-  ],
-  typedStrings: [
-    'Full Stack Developer',
-    'DSA Problem Solver  [ LeetCode Peak: 1590 ]',
-    'Competitive Programmer  [ 500+ Problems ]',
-    'Systems Thinker',
-    'Building in Public',
-    'Open Source Enthusiast',
-  ],
+  
   stats: [
-    { value: 500, suffix: '+', label: 'Problems Solved', color: 'var(--accent-gold)' },
-    { value: 1590, suffix: '', label: 'LC Peak Rating', color: 'var(--accent-green)' },
+    { value: 500, suffix: '+', label: 'Problems Solved' },
+    { value: 1590, suffix: '', label: 'LeetCode Peak' },
+    { value: 3, suffix: '+', label: 'Production Projects' },
+    { value: 6, suffix: '', label: 'Scheduling Algorithms' },
   ],
-  achievements: [
-    { title: "ISRO Space Hackathon", desc: "Participant", color: "var(--accent-gold)" },
-    { title: "LeetCode Competitive Programming", desc: "Achieved a Peak Rating of 1590", color: "var(--accent-green)" },
-    { title: "Custom Code Execution Engine", desc: "Built a Docker-sandboxed execution environment", color: "#ccff00" },
+
+  highlights: [
+    'Docker-sandboxed execution engine',
+    'Redis + BullMQ async pipelines',
+    '6 CPU scheduling algorithms from scratch',
+    'Graph-based dependency resolution',
+    'ISRO Space Hackathon participant',
   ],
 };

@@ -1,324 +1,352 @@
 /* ===== PROJECTS SECTION ===== */
-.projects {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.projects-filters {
+.projects-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 1.8rem 0;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 48px;
 }
 
-.projects-filter-btn {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  padding: 0.4rem 1rem;
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s;
-  letter-spacing: 1px;
-}
-.projects-filter-btn:hover,
-.projects-filter-btn.active {
-  color: var(--accent-gold);
-  border-color: var(--accent-gold);
-  background: var(--accent-gold-dim);
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1.5rem;
-}
-
+/* Project Card */
 .project-card {
-  background: var(--bg-card);
+  background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
+  border-radius: var(--radius-xl);
   overflow: hidden;
   cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
+  transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
   position: relative;
 }
+
 .project-card:hover {
-  border-color: var(--accent-gold-border);
-  box-shadow: var(--accent-gold-glow);
-  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-.project-thumb {
-  height: 160px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-.project-thumb-icon {
-  font-size: 3rem;
-  color: var(--accent-gold);
+.project-card.featured {
+  border-color: var(--accent-primary-border);
 }
 
-.project-card:hover .project-thumb::after {
+.project-card.featured::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(232,182,58,0.03) 2px,
-    rgba(232,182,58,0.03) 4px
-  );
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-accent);
 }
 
-.project-status {
-  position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.6rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  z-index: 2;
-}
-.project-status.ongoing {
-  background: var(--accent-gold-dim);
-  color: var(--accent-gold);
-  border: 1px solid var(--accent-gold-border);
-}
-.project-status.completed {
-  background: var(--green-dim);
-  color: var(--accent-green);
-  border: 1px solid var(--green-border);
+/* Card Header */
+.project-card-header {
+  padding: 32px 32px 0;
 }
 
-.project-featured {
-  position: absolute;
-  top: 0.8rem;
-  right: 0.8rem;
-  font-size: 0.7rem;
-  font-family: 'Fira Code', monospace;
-  color: var(--accent-gold);
-  background: var(--accent-gold-dim);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  border: 1px solid var(--accent-gold-border);
-  z-index: 2;
-}
-
-.project-body {
-  padding: 1.2rem;
-}
-
-.project-title-row {
+.project-card-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  margin-bottom: 16px;
 }
 
-.project-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.15rem;
-  font-weight: 700;
+.project-status-badge {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+}
+.project-status-badge.ongoing {
+  background: var(--accent-primary-dim);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-primary-border);
+}
+.project-status-badge.completed {
+  background: var(--accent-emerald-dim);
+  color: var(--accent-emerald);
+  border: 1px solid var(--accent-emerald-border);
+}
+
+.project-year {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.project-card-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 800;
   color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: -0.02em;
 }
 
-.project-diff {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.6rem;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  background: var(--accent-gold-dim);
-  color: var(--accent-gold);
-  border: 1px solid var(--accent-gold-border);
-}
-
-.project-tagline {
-  font-size: 0.85rem;
+.project-card-subtitle {
+  font-size: var(--text-small);
   color: var(--text-secondary);
-  line-height: 1.5;
-  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
-.project-stack {
+/* Card Body */
+.project-card-body {
+  padding: 24px 32px;
+}
+
+.project-storytelling {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.project-story-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-story-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.project-story-text {
+  color: var(--text-secondary);
+  font-size: var(--text-small);
+  line-height: 1.6;
+}
+
+/* Architecture */
+.project-architecture {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-arch-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+}
+
+.project-arch-flow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-accent);
+  background: var(--bg-primary);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.project-arch-flow.modal {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Card Footer */
+.project-card-footer {
+  padding: 20px 32px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.project-stack-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-bottom: 1rem;
+  gap: 6px;
 }
 
-.project-stack-chip {
-  font-family: 'Fira Code', monospace;
+.project-tech-pill {
+  font-family: var(--font-mono);
   font-size: 0.65rem;
-  padding: 0.2rem 0.5rem;
-  background: var(--bg-off-black);
+  padding: 4px 10px;
+  background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
-  border-radius: 4px;
-  color: var(--text-code);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  letter-spacing: 0.5px;
 }
 
-.project-links {
+.project-card-links {
   display: flex;
-  gap: 0.8rem;
+  gap: 12px;
 }
 
-.project-link {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.78rem;
-  color: var(--accent-gold);
+.project-link-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
   text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: color 0.3s;
+  padding: 6px 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  transition: all var(--transition);
 }
-.project-link:hover {
-  color: var(--accent-green);
+
+.project-link-btn:hover {
+  border-color: var(--accent-primary-border);
+  color: var(--accent-primary);
+  background: var(--accent-primary-dim);
+}
+
+.project-link-btn.primary {
+  background: var(--accent-primary-dim);
+  border-color: var(--accent-primary-border);
+  color: var(--accent-primary);
 }
 
 /* ===== PROJECT MODAL ===== */
 .project-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  animation: modalIn 0.3s ease;
-}
-@keyframes modalIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  padding: 32px;
+  animation: fadeIn 0.3s ease;
 }
 
 .project-modal {
-  background: var(--bg-off-black);
-  border: 1px solid var(--accent-gold-border);
-  border-radius: 20px;
-  max-width: 700px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-xl);
+  max-width: 720px;
   width: 100%;
   max-height: 85vh;
   overflow-y: auto;
-  animation: modalSlideIn 0.3s ease;
-}
-@keyframes modalSlideIn {
-  from { transform: translateY(30px); opacity: 0; }
-  to   { transform: translateY(0); opacity: 1; }
-}
-
-.project-modal-header {
-  height: 180px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 20px 20px 0 0;
   position: relative;
-}
-.project-modal-header-icon {
-  font-size: 4rem;
-  color: var(--accent-gold);
+  animation: fadeInUp 0.3s ease;
 }
 
 .project-modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid var(--accent-gold-border);
-  color: var(--accent-gold);
+  top: 20px;
+  right: 20px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
   width: 36px;
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s;
+  transition: all var(--transition);
+  z-index: 1;
 }
 .project-modal-close:hover {
-  background: var(--accent-gold);
-  color: #0e0e0e;
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
 }
 
-.project-modal-body {
-  padding: 2rem;
+.project-modal-content {
+  padding: 40px;
 }
 
 .project-modal-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 800;
+  margin: 16px 0 8px;
+  letter-spacing: -0.02em;
 }
 
-.project-modal-tagline {
-  color: var(--accent-gold);
-  font-family: 'Fira Code', monospace;
-  font-size: 0.8rem;
-  margin-bottom: 1.5rem;
-}
-
-.project-modal-desc {
+.project-modal-subtitle {
   color: var(--text-secondary);
-  line-height: 1.8;
-  font-size: 0.92rem;
-  margin-bottom: 1.5rem;
+  font-size: var(--text-body);
+  margin-bottom: 32px;
+}
+
+.project-modal-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.project-modal-section h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-body);
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--accent-primary);
+}
+
+.project-modal-section p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: var(--text-small);
+}
+
+/* Tech Decisions */
+.project-tech-decisions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tech-decision-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.tech-decision-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tech-decision-why {
+  color: var(--text-secondary);
+  font-size: var(--text-small);
+  line-height: 1.5;
 }
 
 .project-modal-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.project-modal-learned {
-  padding: 1rem 1.2rem;
-  border: 1.5px solid var(--green-border);
-  border-radius: 12px;
-  background: var(--green-dim);
-  margin-bottom: 1.5rem;
-}
-.project-modal-learned-title {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.75rem;
-  color: var(--accent-green);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 0.5rem;
-}
-.project-modal-learned p {
-  color: var(--text-secondary);
-  font-size: 0.88rem;
-  line-height: 1.6;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .project-modal-actions {
   display: flex;
-  gap: 1rem;
+  gap: 12px;
 }
 
 @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-  .project-modal {
-    margin: 1rem;
-  }
+  .project-storytelling { grid-template-columns: 1fr; }
+  .project-card-header,
+  .project-card-body,
+  .project-card-footer { padding-left: 20px; padding-right: 20px; }
+  .project-card-footer { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .project-modal { margin: 16px; }
+  .project-modal-content { padding: 24px; }
 }

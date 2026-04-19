@@ -2,49 +2,37 @@ import { PERSONAL_INFO } from '../../data/personalInfo.js';
 import FadeUp from '../../components/FadeUp/FadeUp.jsx';
 import './Resume.css';
 
-const HIGHLIGHTS = [
-  'C++', 'JavaScript', 'React', 'Node.js', 'PostgreSQL',
-  'Redis', 'Docker', 'DSA', '500+ Problems',
-];
-
 export default function Resume() {
   return (
-    <section className="resume" id="resume">
-      <FadeUp delay={0.1}>
-        <span className="section-tag">&gt; cat resume.pdf</span>
-        <h2 className="section-title">resume.pdf</h2>
+    <section className="resume-section" id="resume">
+      <FadeUp>
+        <span className="section-eyebrow">Resume</span>
+        <h2 className="section-title">Deep Dive.</h2>
+        <p className="section-subtitle">
+          View my full experience, education, and technical background.
+        </p>
+      </FadeUp>
 
-        <iframe
-          className="resume-preview"
-          src={PERSONAL_INFO.resumePdf}
-          title="Resume Preview"
-          loading="lazy"
-        />
-
-        <div className="resume-actions">
-          <a
-            href={PERSONAL_INFO.resumePdf}
-            className="btn-primary"
-            download="Abhijeet_Singh_Rana_Resume.pdf"
-          >
-            ⬇ Download PDF
-          </a>
-          <a
-            href={PERSONAL_INFO.resumePdf}
-            className="btn-outline-green"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            🔗 View Full Page
+      <FadeUp delay={0.2} className="resume-container glass">
+        <div className="resume-header">
+          <div className="resume-header-text">
+            <h3>Standard PDF Resume</h3>
+            <p>Optimized for ATS and recruiters.</p>
+          </div>
+          <a href={PERSONAL_INFO.resumePdf} className="btn-primary" download="Abhijeet_Singh_Rana_Resume.pdf">
+            Download PDF
           </a>
         </div>
-
-        <div className="resume-updated">Last Updated: 2026</div>
-
-        <div className="resume-highlights">
-          {HIGHLIGHTS.map((h) => (
-            <span key={h} className="resume-highlight-chip">{h}</span>
-          ))}
+        <div className="resume-viewer">
+          {/* using object instead of iframe for better PDF rendering on desktop */}
+          <object data={PERSONAL_INFO.resumePdf} type="application/pdf" width="100%" height="100%">
+            <div className="resume-fallback">
+              <p>Your browser doesn't support built-in PDF viewers.</p>
+              <a href={PERSONAL_INFO.resumePdf} className="btn-outline" download="Abhijeet_Singh_Rana_Resume.pdf">
+                Download Resume Instead
+              </a>
+            </div>
+          </object>
         </div>
       </FadeUp>
     </section>
