@@ -1,6 +1,12 @@
 /* ===== CONTACT SECTION ===== */
 .contact {
-  padding-bottom: 120px;
+  padding: calc(var(--navbar-h) + 60px) 5% 120px;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 .contact-grid {

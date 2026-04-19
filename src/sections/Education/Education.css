@@ -1,9 +1,7 @@
 /* ===== EDUCATION SECTION ===== */
-.edu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
+.edu-single-column {
   margin-top: 48px;
+  max-width: 800px;
 }
 
 .edu-section-title {

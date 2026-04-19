@@ -3,12 +3,13 @@ import { PERSONAL_INFO } from '../../data/personalInfo.js';
 import './Navbar.css';
 
 const NAV_LINKS = [
-  { label: 'About',      href: '#about' },
-  { label: 'Projects',   href: '#projects' },
-  { label: 'Skills',     href: '#skills' },
-  { label: 'Blogs',      href: '#blogs' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Contact',    href: '#contact' },
+  { label: 'About',        path: '/#about' },
+  { label: 'Projects',     path: '/#projects' },
+  { label: 'Skills',       path: '/#skills' },
+  { label: 'Blogs',        path: '/#blogs' },
+  { label: 'Experience',   path: '/#experience' },
+  { label: 'Achievements', path: '/#achievements' },
+  { label: 'Contact',      path: '/contact' },
 ];
 
 export default function Navbar() {
@@ -20,7 +21,7 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
-      const sections = ['about', 'projects', 'skills', 'blogs', 'experience', 'terminal', 'contact'];
+      const sections = ['about', 'projects', 'skills', 'blogs', 'experience', 'achievements', 'terminal'];
       let cur = '';
       sections.forEach(id => {
         const el = document.getElementById(id);
@@ -55,17 +56,23 @@ export default function Navbar() {
         </a>
 
         <ul className="nav-links">
-          {NAV_LINKS.map(l => (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                className={active === l.href.slice(1) ? 'active' : ''}
-                onClick={() => setMenuOpen(false)}
-              >
-                {l.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map(l => {
+            const isActive = l.path === '/contact' 
+              ? window.location.pathname === '/contact'
+              : active === l.path.replace('/#', '');
+              
+            return (
+              <li key={l.path}>
+                <a
+                  href={l.path}
+                  className={isActive ? 'active' : ''}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {l.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="nav-right">

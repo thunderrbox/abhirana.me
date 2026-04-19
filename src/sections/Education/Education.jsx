@@ -1,5 +1,5 @@
 import FadeUp from '../../components/FadeUp/FadeUp.jsx';
-import { EDUCATION, CERTIFICATIONS, ACHIEVEMENTS } from '../../data/certifications.js';
+import { EDUCATION } from '../../data/certifications.js';
 import './Education.css';
 
 export default function Education() {
@@ -7,11 +7,10 @@ export default function Education() {
     <section className="education" id="education">
       <FadeUp>
         <span className="section-eyebrow">Education</span>
-        <h2 className="section-title">Education & Achievements</h2>
+        <h2 className="section-title">Academic Background</h2>
       </FadeUp>
 
-      <div className="edu-grid">
-        {/* Education Timeline */}
+      <div className="edu-single-column">
         <FadeUp className="edu-section" delay={0.1}>
           <div className="edu-timeline">
             {EDUCATION.map((e, i) => (
@@ -30,28 +29,6 @@ export default function Education() {
                     </div>
                   )}
                 </div>
-              </div>
-            ))}
-          </div>
-        </FadeUp>
-
-        {/* Achievements */}
-        <FadeUp className="edu-section" delay={0.2}>
-          <h3 className="edu-section-title">Achievements</h3>
-          <div className="achieve-list">
-            {ACHIEVEMENTS.map((a, i) => (
-              <div key={i} className="achieve-item" style={{ '--achieve-color': a.color }}>
-                <span className="achieve-text">{a.text}</span>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="edu-section-title" style={{ marginTop: '32px' }}>Certifications</h3>
-          <div className="cert-list">
-            {CERTIFICATIONS.map((c, i) => (
-              <div key={i} className="cert-item">
-                <span className="cert-name">{c.name}</span>
-                <span className="cert-platform">{c.platform}</span>
               </div>
             ))}
           </div>

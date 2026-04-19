@@ -22,8 +22,18 @@ export default function Footer() {
         </button>
       </div>
       
-      <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} {PERSONAL_INFO.name}. Building fast, scalable, and reliable systems.</p>
+      <div className="footer-bottom" style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
+        <p className="footer-name" style={{ fontSize: '1rem', color: 'var(--text-primary)', fontWeight: '600' }}>
+          {PERSONAL_INFO.name}
+        </p>
+        <p className="footer-details" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-tertiary)', display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+          <span>{PERSONAL_INFO.email}</span>
+          <span className="footer-dot hidden-mobile">•</span>
+          <span>{PERSONAL_INFO.location}</span>
+          <span className="footer-dot hidden-mobile">•</span>
+          <span>Open for Roles</span>
+        </p>
+        <p style={{ marginTop: '8px' }}>&copy; {new Date().getFullYear()} All rights reserved. Building fast, scalable, and reliable systems.</p>
       </div>
     </footer>
   );
